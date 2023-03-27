@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-03-27T15:54:04-06:00">2023-03-27T15:54:04-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-03-27T16:02:54-06:00">2023-03-27T16:02:54-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -71,7 +71,7 @@
       <tbody>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#b1c7feaeca899bc2d9033482bf868036c16ee93e" class="src_link" title="app/controllers/api/v1/items_controller.rb">app/controllers/api/v1/items_controller.rb</a></td>
+            <td class="strong t-file__name"><a href="#40865bef79bf0e2964e5b39b2d49f98de6484c77" class="src_link" title="app/controllers/api/v1/merchant/items_controller.rb">app/controllers/api/v1/merchant/items_controller.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">25</td>
             <td class="cell--number">8</td>
@@ -362,9 +362,9 @@
 
       <div class="source_files">
       
-        <div class="source_table" id="b1c7feaeca899bc2d9033482bf868036c16ee93e">
+        <div class="source_table" id="40865bef79bf0e2964e5b39b2d49f98de6484c77">
   <div class="header">
-    <h3>app/controllers/api/v1/items_controller.rb</h3>
+    <h3>app/controllers/api/v1/merchant/items_controller.rb</h3>
     <h4>
       <span class="green">
   100.0%
@@ -395,7 +395,7 @@
 
             
 
-            <code class="ruby">class Api::V1::ItemsController &lt; ApplicationController</code>
+            <code class="ruby">class Api::V1::Merchant::ItemsController &lt; ApplicationController</code>
           </li>
         </div>
       
@@ -3749,7 +3749,7 @@
 
             
 
-            <code class="ruby">				resources :items, only: [:index]</code>
+            <code class="ruby">				resources :items, only: [:index], controller: &#39;merchant/items&#39;</code>
           </li>
         </div>
       
