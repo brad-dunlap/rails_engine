@@ -40,4 +40,19 @@ class Api::V1::ItemsController < ApplicationController
 			render json: { errors: "Item Not Found" }, status: 404
 		end		
 	end
+
+	def create
+		item = Item.create(item_params)
+		if item.save
+			render json: Item.create(item_params)
+		else
+			render json: { errors: "Item Not Saved" }, status:404
+		end
+	end
+
+	private
+
+	def item_params
+		params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
+	end
 end

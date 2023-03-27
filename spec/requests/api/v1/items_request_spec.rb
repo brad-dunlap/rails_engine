@@ -77,4 +77,29 @@ describe 'Items API' do
 			end
 		end
 	end
+
+	context "it can create a new item" do
+		describe 'POST /item/' do
+			it 'creates a new item' do
+				@merchant = Merchant.create(:name => 'Bob', :id => 1)
+
+				item_params = ({
+					name: 'chair',
+					description: 'it is just a chair',
+					unit_price: 999.99,
+					merchant_id: 1
+				})
+				headers = {"CONTENT_TYPE" => "application/json"}
+
+				post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+
+				created_item = Item.last
+				expect(response).to be_successful
+				expect(created_item.name).to eq(item_params[:name])
+				expect(created_item.description).to eq(item_params[:description])
+				expect(created_item.unit_price).to eq(item_params[:unit_price])
+				expect(created_item.merchant_id).to eq(item_params[:merchant_id])
+			end
+		end
+	end
 end
