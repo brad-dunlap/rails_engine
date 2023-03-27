@@ -136,7 +136,7 @@ describe 'Items API' do
 					expect(response).to_not be_successful
 					expect(response.status).to eq(404)
 					expect(item.name).to eq(previous_item_name)
-					expect(item.name).to_not eq("Apple MacBook Pro")
+					expect(item.name).to_not eq("New Item")
 					expect(response_body[:errors]).to eq("Unable to update item")
 				end
 			end
