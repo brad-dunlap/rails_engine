@@ -16,16 +16,19 @@ class Api::V1::MerchantsController < ApplicationController
 	end
 
 	def show
-		@merchant = Merchant.find(params[:id])
-
-		render json: {
-			data: {
-				id: @merchant.id,
-				type: 'merchant',
-				attributes: {
-					name: @merchant.name
+		if Merchant.exists?(params[:id])
+			@merchant = Merchant.find(params[:id])
+				render json: {
+					data: {
+						id: @merchant.id,
+						type: 'merchant',
+						attributes: {
+							name: @merchant.name
+						}
+					}
 				}
-			}
-		}
+		else
+			render json: { errors: "Merchant not found" }, status: 404
+		end				
 	end
 end
