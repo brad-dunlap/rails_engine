@@ -31,6 +31,24 @@ describe 'Items API' do
 					expect(item[:attributes][:merchant_id]).to be_an(Integer)
 				end
 			end
+
+			describe 'GET /items/:id' do
+				it 'can get one item by its id' do
+					item_id = create(:item).id
+
+					get "/api/v1/items/#{item_id}"
+
+					expect(response).to be_successful
+
+					item = JSON.parse(response.body, symbolize_names: true)
+
+					expect(item[:data][:id]).to eq(item_id)
+					expect(item[:data][:attributes]).to have_key(:name)
+					expect(item[:data][:attributes]).to have_key(:description)
+					expect(item[:data][:attributes]).to have_key(:unit_price)
+					expect(item[:data][:attributes]).to have_key(:merchant_id)
+				end
+			end
 		end
 	end
 
@@ -44,7 +62,18 @@ describe 'Items API' do
 
 				expect(response.status).to eq(404)
 				expect(items[:errors]).to eq("No Items Found")
-			
+			end
+		end
+
+		describe 'GET /items/:id' do
+			it 'returns an error message' do
+
+				get '/api/v1/items/1'
+
+				item = JSON.parse(response.body, symbolize_names: true )
+
+				expect(response.status).to eq(404)
+				expect(item[:errors]).to eq("Item Not Found")
 			end
 		end
 	end
