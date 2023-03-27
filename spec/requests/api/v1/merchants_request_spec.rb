@@ -25,7 +25,7 @@ describe 'Merchants API' do
 			end
 		end
 		
-		describe 'GET /merchants' do
+		describe 'GET /merchants/:id' do
 			it 'can get one merchant by its id' do
 				id = create(:merchant).id
 
@@ -43,6 +43,18 @@ describe 'Merchants API' do
 	end
 
 	context 'when a merchant does not exist' do
+		describe 'GET /merchants' do
+			it 'returns a 404 error' do
+
+				get '/api/v1/merchants'
+
+				merchants = JSON.parse(response.body, symbolize_names: true )
+
+				expect(response.status).to eq(404)
+				expect(merchants[:errors]).to eq("No Merchants Found")
+			end
+		end
+		
 		describe 'GET /merchants/1' do
 			it 'returns a 404 error' do
 
@@ -51,6 +63,7 @@ describe 'Merchants API' do
 				merchant = JSON.parse(response.body, symbolize_names: true )
 
 				expect(response.status).to eq(404)
+				expect(merchant[:errors]).to eq("Merchant not found")
 			end
 		end
 	end
