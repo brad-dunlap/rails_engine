@@ -99,4 +99,19 @@ describe 'Merchants API' do
 			end
 		end
 	end
+
+	context 'when a merchant exists, but an item does not' do
+		describe 'GET /merchants/1/items' do
+			it 'returns a 404 error' do
+
+				merchant = create(:merchant)
+				get "/api/v1/merchants/#{merchant.id}/items"
+
+				items = JSON.parse(response.body, symbolize_names: true )
+
+				expect(response.status).to eq(404)
+				expect(items[:errors]).to eq("Merchant Item not found")
+			end
+		end
+	end
 end
