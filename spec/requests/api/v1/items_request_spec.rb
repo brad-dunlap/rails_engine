@@ -102,4 +102,44 @@ describe 'Items API' do
 			end
 		end
 	end
+
+	context 'it can update existing items' do
+		describe 'PATCH /item/' do
+			context 'it can successfully update existing items' do
+				it 'updates the item' do
+					item = create(:item)
+					previous_item_name = Item.last.name
+					item_params = { name: "New Item" }
+					headers = { "CONTENT_TYPE" => "application/json" }
+
+					patch "/api/v1/items/#{item.id}", headers: headers, params: JSON.generate({item: item_params})
+					response_body = JSON.parse(response.body, symbolize_names: true)
+					item = Item.find_by(id: item.id)
+
+					expect(response).to be_successful
+					expect(item.name).to eq("New Item")
+					expect(item.name).to_not eq(previous_item_name)
+				end
+			end
+
+			context "it cannot successfully update an existing item" do
+				it 'returns an error' do
+					item = create(:item)
+					previous_item_name = Item.last.name
+					item_params = { name: "" }
+					headers = { "CONTENT_TYPE" => "application/json" }
+					
+					patch "/api/v1/items/#{item.id}", headers: headers, params: JSON.generate({item: item_params})
+					response_body = JSON.parse(response.body, symbolize_names: true)
+					item = Item.find_by(id: item.id)
+					
+					expect(response).to_not be_successful
+					expect(response.status).to eq(404)
+					expect(item.name).to eq(previous_item_name)
+					expect(item.name).to_not eq("Apple MacBook Pro")
+					expect(response_body[:errors]).to eq("Unable to update item")
+				end
+			end
+		end
+	end
 end

@@ -44,12 +44,43 @@ class Api::V1::ItemsController < ApplicationController
 	def create
 		item = Item.create(item_params)
 		if item.save
-			render json: Item.create(item_params)
-		else
-			render json: { errors: "Item Not Saved" }, status:404
-		end
+			render json: {
+				data: {
+					id: item.id,
+					type: 'item',
+					attributes: {
+						name: item.name,
+						description: item.description,
+						unit_price: item.unit_price,
+						merchant_id: item.merchant_id
+					}
+				}
+			}
+		else 
+			render json: { errors: "Unable to Create Item" }, status: 404
+		end		
 	end
 
+	def update
+		item = Item.find(params[:id])
+		item.update(item_params)
+		if item.save
+			render json: {
+				data: {
+					id: item.id,
+					type: 'item',
+					attributes: {
+						name: item.name,
+						description: item.description,
+						unit_price: item.unit_price,
+						merchant_id: item.merchant_id
+					}
+				}
+			}
+		else 
+			render json: { errors: "Unable to update item" }, status: 404
+		end
+	end
 	private
 
 	def item_params
