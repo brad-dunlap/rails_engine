@@ -1,9 +1,31 @@
 class Api::V1::MerchantsController < ApplicationController
 	def index
-		render json: Merchant.all
+		@merchants = Merchant.all
+
+		render json: {
+			data: @merchants.map do |merchant|
+				{
+					id: merchant.id,
+					type: 'merchant',
+					attributes: {
+						name: merchant.name
+					}
+				}
+			end
+		}
 	end
 
 	def show
-		render json: Merchant.find(params[:id])
+		@merchant = Merchant.find(params[:id])
+
+		render json: {
+			data: {
+				id: @merchant.id,
+				type: 'merchant',
+				attributes: {
+					name: @merchant.name
+				}
+			}
+		}
 	end
 end
