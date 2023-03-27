@@ -28,7 +28,6 @@ describe 'Merchants API' do
 		describe 'GET /merchants/:id' do
 			it 'can get one merchant by its id' do
 				id = create(:merchant).id
-
 				get "/api/v1/merchants/#{id}"
 
 				merchant = JSON.parse(response.body, symbolize_names: true)
@@ -38,6 +37,39 @@ describe 'Merchants API' do
 				expect(merchant[:data][:id]).to eq(id)
 				expect(merchant[:data][:attributes]).to have_key(:name)
 				expect(merchant[:data][:attributes][:name]).to be_a(String)
+			end
+		end
+
+		describe 'GET /merchants/:id/items' do
+			it 'can get all items for a merchant' do
+
+				merchant = create(:merchant)
+				items = create_list(:item, 3, merchant: merchant)
+
+				get "/api/v1/merchants/#{merchant.id}/items"
+
+				items = JSON.parse(response.body, symbolize_names: true)
+
+				expect(response).to be_successful
+
+				expect(items[:data].count).to eq(3)
+
+				items[:data].each do |item|
+					expect(item).to have_key(:id)
+					expect(item[:id]).to be_an(Integer)
+
+					expect(item[:attributes]).to have_key(:name)
+					expect(item[:attributes][:name]).to be_a(String)
+
+					expect(item[:attributes]).to have_key(:description)
+					expect(item[:attributes][:description]).to be_a(String)
+
+					expect(item[:attributes]).to have_key(:unit_price)
+					expect(item[:attributes][:unit_price]).to be_a(Float)
+
+					expect(item[:attributes]).to have_key(:merchant_id)
+					expect(item[:attributes][:merchant_id]).to be_an(Integer)
+				end
 			end
 		end
 	end

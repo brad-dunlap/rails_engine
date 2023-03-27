@@ -181,9 +181,9 @@
         "lines": [
           1,
           1,
-          1,
-          1,
-          1,
+          4,
+          4,
+          4,
           1,
           null,
           null
@@ -193,7 +193,7 @@
         "lines": [
           1,
           1,
-          5,
+          6,
           null,
           null
         ]
@@ -209,6 +209,8 @@
           1,
           1,
           1,
+          1,
+          null,
           null,
           null,
           null
@@ -351,7 +353,6 @@
           1,
           1,
           1,
-          null,
           1,
           null,
           1,
@@ -361,6 +362,39 @@
           1,
           1,
           1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          3,
+          3,
+          null,
+          3,
+          3,
+          null,
+          3,
+          3,
+          null,
+          3,
+          3,
+          null,
+          3,
+          3,
+          null,
           null,
           null,
           null,
@@ -452,8 +486,37 @@
           1,
           null
         ]
+      },
+      "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/app/controllers/api/v1/items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1679951886
+    "timestamp": 1679953945
   }
 }
