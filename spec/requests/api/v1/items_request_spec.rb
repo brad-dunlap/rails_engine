@@ -33,4 +33,19 @@ describe 'Items API' do
 			end
 		end
 	end
+
+	context 'when an item does not exist' do
+		describe 'GET /items' do
+			it 'returns an error message' do
+
+				get '/api/v1/items'
+
+				items = JSON.parse(response.body, symbolize_names: true )
+
+				expect(response.status).to eq(404)
+				expect(items[:errors]).to eq("No Items Found")
+			
+			end
+		end
+	end
 end
