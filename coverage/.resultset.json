@@ -181,9 +181,9 @@
         "lines": [
           1,
           1,
-          4,
-          4,
-          4,
+          7,
+          7,
+          7,
           1,
           null,
           null
@@ -193,7 +193,7 @@
         "lines": [
           1,
           1,
-          7,
+          10,
           null,
           null
         ]
@@ -211,6 +211,7 @@
           1,
           1,
           null,
+          1,
           null,
           null,
           null
@@ -318,6 +319,46 @@
         "lines": [
           1,
           1,
+          null
+        ]
+      },
+      "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/spec/requests/api/v1/items_request_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          3,
+          3,
+          null,
+          3,
+          3,
+          null,
+          3,
+          3,
+          null,
+          3,
+          3,
+          null,
+          3,
+          3,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -454,6 +495,39 @@
           null
         ]
       },
+      "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/app/controllers/api/v1/items_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          null,
+          1,
+          null,
+          null,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
       "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/app/controllers/api/v1/merchants_controller.rb": {
         "lines": [
           1,
@@ -496,12 +570,6 @@
           null
         ]
       },
-      "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
       "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/app/controllers/api/v1/merchant/items_controller.rb": {
         "lines": [
           1,
@@ -532,6 +600,6 @@
         ]
       }
     },
-    "timestamp": 1679954574
+    "timestamp": 1679955288
   }
 }
