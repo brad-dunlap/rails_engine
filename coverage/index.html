@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-03-28T11:43:53-06:00">2023-03-28T11:43:53-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-03-28T11:54:38-06:00">2023-03-28T11:54:38-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  99.28%
+  99.53%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.41
+         1.42
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>417</b> relevant lines,
-    <span class="green"><b>414</b> lines covered</span> and
-    <span class="red"><b>3</b> lines missed. </span>
+    <b>428</b> relevant lines,
+    <span class="green"><b>426</b> lines covered</span> and
+    <span class="red"><b>2</b> lines missed. </span>
     (<span class="green">
-  99.28%
+  99.53%
 </span>
 )
   </div>
@@ -72,12 +72,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#b1c7feaeca899bc2d9033482bf868036c16ee93e" class="src_link" title="app/controllers/api/v1/items_controller.rb">app/controllers/api/v1/items_controller.rb</a></td>
-            <td class="green strong cell--number t-file__coverage">96.88 %</td>
-            <td class="cell--number">56</td>
-            <td class="cell--number">32</td>
-            <td class="cell--number">31</td>
-            <td class="cell--number">1</td>
-            <td class="cell--number">1.28</td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
+            <td class="cell--number">59</td>
+            <td class="cell--number">33</td>
+            <td class="cell--number">33</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.52</td>
             
           </tr>
         
@@ -403,11 +403,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#140d5b1fce190cb5096ef87789972baaacfc3af2" class="src_link" title="spec/requests/api/v1/items_request_spec.rb">spec/requests/api/v1/items_request_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">236</td>
-            <td class="cell--number">148</td>
-            <td class="cell--number">148</td>
+            <td class="cell--number">257</td>
+            <td class="cell--number">158</td>
+            <td class="cell--number">158</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.14</td>
+            <td class="cell--number">1.13</td>
             
           </tr>
         
@@ -444,7 +444,7 @@
     <h3>app/controllers/api/v1/items_controller.rb</h3>
     <h4>
       <span class="green">
-  96.88%
+  100.0%
 </span>
 
       lines covered
@@ -453,9 +453,9 @@
     
 
     <div class="t-line-summary">
-      <b>32</b> relevant lines.
-      <span class="green"><b>31</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <b>33</b> relevant lines.
+      <span class="green"><b>33</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
 
     
@@ -686,13 +686,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="21">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="21">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">		item = Item.create!(item_params)</code>
+            <code class="ruby">		if item_params[:name].blank? || item_params[:description].blank? || item_params[:unit_price].blank?</code>
           </li>
         </div>
       
@@ -703,7 +703,7 @@
 
             
 
-            <code class="ruby">		render json: ItemSerializer.new(item), status: :created</code>
+            <code class="ruby">			render json: { errors: &quot;Unable to create item - missing required parameters&quot; }, status: :unprocessable_entity</code>
           </li>
         </div>
       
@@ -714,29 +714,29 @@
 
             
 
-            <code class="ruby">	rescue ActiveRecord::RecordInvalid</code>
+            <code class="ruby">		else</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="24">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">		render json: { errors: &quot;Unable to Create Item&quot; }, status: :unprocessable_entity</code>
+            
+
+            <code class="ruby">			item = Item.create!(item_params)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">	end</code>
+            
+
+            <code class="ruby">			render json: ItemSerializer.new(item), status: :created</code>
           </li>
         </div>
       
@@ -747,12 +747,45 @@
 
             
 
+            <code class="ruby">		end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="27">
+            
+            
+
+            
+
+            <code class="ruby">	end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
+            
+            
+
+            
+
+            <code class="ruby">	</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="29">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="27">
+          <li class="covered" data-hits="1" data-linenumber="30">
             <span class="hits">1</span>
             
 
@@ -763,7 +796,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="28">
+          <li class="covered" data-hits="2" data-linenumber="31">
             <span class="hits">2</span>
             
 
@@ -774,7 +807,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="29">
+          <li class="covered" data-hits="2" data-linenumber="32">
             <span class="hits">2</span>
             
 
@@ -785,7 +818,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="30">
+          <li class="covered" data-hits="2" data-linenumber="33">
             <span class="hits">2</span>
             
 
@@ -796,7 +829,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="31">
+          <li class="covered" data-hits="1" data-linenumber="34">
             <span class="hits">1</span>
             
 
@@ -807,7 +840,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="32">
+          <li class="never" data-hits="" data-linenumber="35">
             
             
 
@@ -818,7 +851,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="33">
+          <li class="covered" data-hits="1" data-linenumber="36">
             <span class="hits">1</span>
             
 
@@ -829,7 +862,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="34">
+          <li class="never" data-hits="" data-linenumber="37">
             
             
 
@@ -840,7 +873,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="35">
+          <li class="never" data-hits="" data-linenumber="38">
             
             
 
@@ -851,46 +884,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="36">
+          <li class="never" data-hits="" data-linenumber="39">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="37">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">	def destroy</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="38">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">		if Item.exists?(params[:id])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="39">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">			item = Item.find(params[:id])		</code>
           </li>
         </div>
       
@@ -901,7 +901,7 @@
 
             
 
-            <code class="ruby">			item.invoices.each do |invoice|</code>
+            <code class="ruby">	def destroy</code>
           </li>
         </div>
       
@@ -912,7 +912,7 @@
 
             
 
-            <code class="ruby">				if invoice.has_items?</code>
+            <code class="ruby">		if Item.exists?(params[:id])</code>
           </li>
         </div>
       
@@ -923,29 +923,29 @@
 
             
 
-            <code class="ruby">				invoice.destroy</code>
+            <code class="ruby">			item = Item.find(params[:id])		</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="43">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="43">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">				end</code>
+            
+
+            <code class="ruby">			item.invoices.each do |invoice|</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="44">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="44">
+            <span class="hits">2</span>
             
 
-            <code class="ruby">			end</code>
+            
+
+            <code class="ruby">				if invoice.has_items?</code>
           </li>
         </div>
       
@@ -956,7 +956,7 @@
 
             
 
-            <code class="ruby">			item.destroy</code>
+            <code class="ruby">				invoice.destroy</code>
           </li>
         </div>
       
@@ -967,29 +967,29 @@
 
             
 
-            <code class="ruby">		else</code>
+            <code class="ruby">				end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="47">
+          <li class="never" data-hits="" data-linenumber="47">
+            
+            
+
+            
+
+            <code class="ruby">			end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="48">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">			render json: { errors: &quot;Unable to find item with id&quot; }, status: 404</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="48">
-            
-            
-
-            
-
-            <code class="ruby">		end</code>
+            <code class="ruby">			item.destroy</code>
           </li>
         </div>
       
@@ -1000,29 +1000,29 @@
 
             
 
-            <code class="ruby">	end</code>
+            <code class="ruby">		else</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="50">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="51">
+          <li class="covered" data-hits="1" data-linenumber="50">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">	private</code>
+            <code class="ruby">			render json: { errors: &quot;Unable to find item with id&quot; }, status: 404</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="51">
+            
+            
+
+            
+
+            <code class="ruby">		end</code>
           </li>
         </div>
       
@@ -1033,29 +1033,29 @@
 
             
 
+            <code class="ruby">	end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="53">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="53">
+          <li class="covered" data-hits="1" data-linenumber="54">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">	def item_params</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="3" data-linenumber="54">
-            <span class="hits">3</span>
-            
-
-            
-
-            <code class="ruby">		params.require(:item).permit(:name, :description, :unit_price, :merchant_id)</code>
+            <code class="ruby">	private</code>
           </li>
         </div>
       
@@ -1066,12 +1066,45 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="56">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">	def item_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="9" data-linenumber="57">
+            <span class="hits">9</span>
+            
+
+            
+
+            <code class="ruby">		params.require(:item).permit(:name, :description, :unit_price, :merchant_id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="58">
+            
+            
+
+            
+
             <code class="ruby">	end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="56">
+          <li class="never" data-hits="" data-linenumber="59">
             
             
 
@@ -5948,8 +5981,8 @@
     
 
     <div class="t-line-summary">
-      <b>148</b> relevant lines.
-      <span class="green"><b>148</b> lines covered</span> and
+      <b>158</b> relevant lines.
+      <span class="green"><b>158</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -7122,7 +7155,7 @@
 
             
 
-            <code class="ruby">	context &#39;it can update existing items&#39; do</code>
+            <code class="ruby">	context &quot;it cannot create a new item&quot; do</code>
           </li>
         </div>
       
@@ -7133,7 +7166,7 @@
 
             
 
-            <code class="ruby">		describe &#39;PATCH /item/&#39; do</code>
+            <code class="ruby">		describe &#39;POST /item/&#39; do</code>
           </li>
         </div>
       
@@ -7144,7 +7177,7 @@
 
             
 
-            <code class="ruby">			context &#39;it can successfully update existing items&#39; do</code>
+            <code class="ruby">			it &#39;returns error if uable to create&#39; do</code>
           </li>
         </div>
       
@@ -7155,29 +7188,29 @@
 
             
 
-            <code class="ruby">				it &#39;updates the item&#39; do</code>
+            <code class="ruby">				merchant = Merchant.create(:name =&gt; &#39;Bob&#39;, :id =&gt; 1)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="110">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="110">
+            
             
 
             
 
-            <code class="ruby">					item = create(:item)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="111">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="111">
+            
             
 
             
 
-            <code class="ruby">					previous_item_name = Item.last.name</code>
+            <code class="ruby">				item_params = ({</code>
           </li>
         </div>
       
@@ -7188,18 +7221,18 @@
 
             
 
-            <code class="ruby">					item_params = { name: &quot;New Item&quot; }</code>
+            <code class="ruby">					name: &#39;chair&#39;,</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="113">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="113">
+            
             
 
             
 
-            <code class="ruby">					headers = { &quot;CONTENT_TYPE&quot; =&gt; &quot;application/json&quot; }</code>
+            <code class="ruby">					description: &#39;it is just a chair&#39;,</code>
           </li>
         </div>
       
@@ -7210,18 +7243,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">					merchant_id: merchant.id</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="115">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="115">
+            
             
 
             
 
-            <code class="ruby">					patch &quot;/api/v1/items/#{item.id}&quot;, headers: headers, params: JSON.generate({item: item_params})</code>
+            <code class="ruby">				})</code>
           </li>
         </div>
       
@@ -7232,23 +7265,12 @@
 
             
 
-            <code class="ruby">					response_body = JSON.parse(response.body, symbolize_names: true)</code>
+            <code class="ruby">				headers = {&quot;CONTENT_TYPE&quot; =&gt; &quot;application/json&quot;}</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="117">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					item = Item.find_by(id: item.id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="118">
+          <li class="never" data-hits="" data-linenumber="117">
             
             
 
@@ -7259,13 +7281,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="119">
+          <li class="covered" data-hits="1" data-linenumber="118">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">					expect(response).to be_successful</code>
+            <code class="ruby">				post &quot;/api/v1/items&quot;, headers: headers, params: JSON.generate(item: item_params)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="119">
+            
+            
+
+            
+
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -7276,7 +7309,7 @@
 
             
 
-            <code class="ruby">					expect(item.name).to eq(&quot;New Item&quot;)</code>
+            <code class="ruby">				expect(response).to_not be_successful</code>
           </li>
         </div>
       
@@ -7287,18 +7320,18 @@
 
             
 
-            <code class="ruby">					expect(item.name).to_not eq(previous_item_name)</code>
+            <code class="ruby">				expect(response.status).to eq(422)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="122">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="122">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">				end</code>
+            
+
+            <code class="ruby">				expect(response.body).to include(&quot;Unable to create item - missing required parameters&quot;)</code>
           </li>
         </div>
       
@@ -7320,29 +7353,29 @@
 
             
 
+            <code class="ruby">		end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="125">
+            
+            
+
+            
+
+            <code class="ruby">	end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="126">
+            
+            
+
+            
+
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="125">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">			context &quot;it cannot update an existing item&quot; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="126">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">				it &#39;returns an error&#39; do</code>
           </li>
         </div>
       
@@ -7353,7 +7386,7 @@
 
             
 
-            <code class="ruby">					item = create(:item)</code>
+            <code class="ruby">	context &#39;it can update existing items&#39; do</code>
           </li>
         </div>
       
@@ -7364,7 +7397,7 @@
 
             
 
-            <code class="ruby">					previous_item_name = Item.last.name</code>
+            <code class="ruby">		describe &#39;PATCH /item/&#39; do</code>
           </li>
         </div>
       
@@ -7375,7 +7408,7 @@
 
             
 
-            <code class="ruby">					item_params = { name: &quot;&quot; }</code>
+            <code class="ruby">			context &#39;it can successfully update existing items&#39; do</code>
           </li>
         </div>
       
@@ -7386,18 +7419,18 @@
 
             
 
-            <code class="ruby">					headers = { &quot;CONTENT_TYPE&quot; =&gt; &quot;application/json&quot; }</code>
+            <code class="ruby">				it &#39;updates the item&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="131">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="131">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">					</code>
+            
+
+            <code class="ruby">					item = create(:item)</code>
           </li>
         </div>
       
@@ -7408,7 +7441,7 @@
 
             
 
-            <code class="ruby">					patch &quot;/api/v1/items/#{item.id}&quot;, headers: headers, params: JSON.generate({item: item_params})</code>
+            <code class="ruby">					previous_item_name = Item.last.name</code>
           </li>
         </div>
       
@@ -7419,7 +7452,7 @@
 
             
 
-            <code class="ruby">					response_body = JSON.parse(response.body, symbolize_names: true)</code>
+            <code class="ruby">					item_params = { name: &quot;New Item&quot; }</code>
           </li>
         </div>
       
@@ -7430,7 +7463,7 @@
 
             
 
-            <code class="ruby">					item = Item.find_by(id: item.id)</code>
+            <code class="ruby">					headers = { &quot;CONTENT_TYPE&quot; =&gt; &quot;application/json&quot; }</code>
           </li>
         </div>
       
@@ -7441,7 +7474,7 @@
 
             
 
-            <code class="ruby">					</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -7452,7 +7485,7 @@
 
             
 
-            <code class="ruby">					expect(response).to_not be_successful</code>
+            <code class="ruby">					patch &quot;/api/v1/items/#{item.id}&quot;, headers: headers, params: JSON.generate({item: item_params})</code>
           </li>
         </div>
       
@@ -7463,7 +7496,7 @@
 
             
 
-            <code class="ruby">					expect(response.status).to eq(422)</code>
+            <code class="ruby">					response_body = JSON.parse(response.body, symbolize_names: true)</code>
           </li>
         </div>
       
@@ -7474,18 +7507,18 @@
 
             
 
-            <code class="ruby">					expect(item.name).to eq(previous_item_name)</code>
+            <code class="ruby">					item = Item.find_by(id: item.id)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="139">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="139">
+            
             
 
             
 
-            <code class="ruby">					expect(item.name).to_not eq(&quot;New Item&quot;)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -7496,29 +7529,29 @@
 
             
 
-            <code class="ruby">					expect(response_body[:errors]).to eq(&quot;Unable to update item&quot;)</code>
+            <code class="ruby">					expect(response).to be_successful</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="141">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="141">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">				end</code>
+            
+
+            <code class="ruby">					expect(item.name).to eq(&quot;New Item&quot;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="142">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="142">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">			end</code>
+            
+
+            <code class="ruby">					expect(item.name).to_not eq(previous_item_name)</code>
           </li>
         </div>
       
@@ -7529,7 +7562,7 @@
 
             
 
-            <code class="ruby">		end</code>
+            <code class="ruby">				end</code>
           </li>
         </div>
       
@@ -7540,18 +7573,18 @@
 
             
 
-            <code class="ruby">		</code>
+            <code class="ruby">			end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="145">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="145">
+            
             
 
             
 
-            <code class="ruby">		context &quot;it can delete an item&quot; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -7562,7 +7595,7 @@
 
             
 
-            <code class="ruby">			describe &quot;DESTROY /items/:id&quot; do</code>
+            <code class="ruby">			context &quot;it cannot update an existing item&quot; do</code>
           </li>
         </div>
       
@@ -7573,7 +7606,7 @@
 
             
 
-            <code class="ruby">				it &#39;should delete an item&#39; do</code>
+            <code class="ruby">				it &#39;returns an error&#39; do</code>
           </li>
         </div>
       
@@ -7584,7 +7617,7 @@
 
             
 
-            <code class="ruby">					merchant = create(:merchant)</code>
+            <code class="ruby">					item = create(:item)</code>
           </li>
         </div>
       
@@ -7595,18 +7628,18 @@
 
             
 
-            <code class="ruby">					customer = create(:customer)</code>
+            <code class="ruby">					previous_item_name = Item.last.name</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="150">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="150">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">					item_params = { name: &quot;&quot; }</code>
           </li>
         </div>
       
@@ -7617,29 +7650,29 @@
 
             
 
-            <code class="ruby">					item = create(:item, merchant_id: merchant.id)</code>
+            <code class="ruby">					headers = { &quot;CONTENT_TYPE&quot; =&gt; &quot;application/json&quot; }</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="152">
+          <li class="never" data-hits="" data-linenumber="152">
+            
+            
+
+            
+
+            <code class="ruby">					</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="153">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">					item_2 = create(:item, merchant_id: merchant.id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="153">
-            
-            
-
-            
-
-            <code class="ruby"></code>
+            <code class="ruby">					patch &quot;/api/v1/items/#{item.id}&quot;, headers: headers, params: JSON.generate({item: item_params})</code>
           </li>
         </div>
       
@@ -7650,7 +7683,7 @@
 
             
 
-            <code class="ruby">					invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)</code>
+            <code class="ruby">					response_body = JSON.parse(response.body, symbolize_names: true)</code>
           </li>
         </div>
       
@@ -7661,7 +7694,7 @@
 
             
 
-            <code class="ruby">					invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)</code>
+            <code class="ruby">					item = Item.find_by(id: item.id)</code>
           </li>
         </div>
       
@@ -7683,7 +7716,7 @@
 
             
 
-            <code class="ruby">					invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)</code>
+            <code class="ruby">					expect(response).to_not be_successful</code>
           </li>
         </div>
       
@@ -7694,7 +7727,7 @@
 
             
 
-            <code class="ruby">					invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)</code>
+            <code class="ruby">					expect(response.status).to eq(422)</code>
           </li>
         </div>
       
@@ -7705,18 +7738,18 @@
 
             
 
-            <code class="ruby">					invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)</code>
+            <code class="ruby">					expect(item.name).to eq(previous_item_name)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="160">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="160">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">					</code>
+            
+
+            <code class="ruby">					expect(item.name).to_not eq(&quot;New Item&quot;)</code>
           </li>
         </div>
       
@@ -7727,144 +7760,12 @@
 
             
 
-            <code class="ruby">					expect(Item.count).to eq(2)</code>
+            <code class="ruby">					expect(response_body[:errors]).to eq(&quot;Unable to update item&quot;)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="162">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Invoice.count).to eq(2)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="163">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(InvoiceItem.count).to eq(3)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="164">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Merchant.count).to eq(1)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="165">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="166">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					delete &quot;/api/v1/items/#{item.id}&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="167">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="168">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(response).to be_successful</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="169">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(response.status).to eq(204)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="170">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">					expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="171">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Item.count).to eq(1)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="172">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Invoice.count).to eq(1)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="173">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(InvoiceItem.count).to eq(1)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="174">
+          <li class="never" data-hits="" data-linenumber="162">
             
             
 
@@ -7875,7 +7776,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="175">
+          <li class="never" data-hits="" data-linenumber="163">
             
             
 
@@ -7886,645 +7787,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="176">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="177">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">			context &#39;when the item does not exist&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="178">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">				it &#39;sends an error message&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="179">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					merchant = create(:merchant)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="180">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					customer = create(:customer)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="181">
-            
-            
-
-            
-
-            <code class="ruby">	</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="182">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					item = create(:item, merchant_id: merchant.id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="183">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					item_2 = create(:item, merchant_id: merchant.id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="184">
-            
-            
-
-            
-
-            <code class="ruby">	</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="185">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="186">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="187">
-            
-            
-
-            
-
-            <code class="ruby">					</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="188">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="189">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="190">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="191">
-            
-            
-
-            
-
-            <code class="ruby">					</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="192">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Item.count).to eq(2)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="193">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Invoice.count).to eq(2)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="194">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(InvoiceItem.count).to eq(3)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="195">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Merchant.count).to eq(1)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="196">
-            
-            
-
-            
-
-            <code class="ruby">	</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="197">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					delete &quot;/api/v1/items/#{Item.last.id+1}&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="198">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					response_body = JSON.parse(response.body, symbolize_names: true)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="199">
-            
-            
-
-            
-
-            <code class="ruby">	</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="200">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(response).to_not be_successful</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="201">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(response.status).to eq(404)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="202">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(response_body[:errors]).to eq(&quot;Unable to find item with id&quot;)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="203">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Item.count).to eq(2)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="204">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Invoice.count).to eq(2)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="205">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(InvoiceItem.count).to eq(3)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="206">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					expect(Merchant.count).to eq(1)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="207">
-            
-            
-
-            
-
-            <code class="ruby">				end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="208">
-            
-            
-
-            
-
-            <code class="ruby">			end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="209">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="210">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">			context &#39;it can return merchant data&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="211">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">				describe &#39;GET /items/:id/merchant&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="212">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">					it &#39;returns merchant data&#39; do</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="213">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="214">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						merchant1 = create(:merchant)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="215">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						merchant2 = create(:merchant)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="216">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						item = create(:item, merchant_id: merchant1.id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="217">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="218">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						get &quot;/api/v1/items/#{item.id}/merchant&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="219">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="220">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						merchant_data = JSON.parse(response.body, symbolize_names: true)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="221">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="222">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						expect(response).to be_successful</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="223">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						expect(merchant_data).to have_key(:data)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="224">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="225">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						expect(merchant_data[:data]).to have_key(:id)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="226">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						expect(merchant_data[:data][:id]).to be_a(String)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="227">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="228">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						expect(merchant_data[:data]).to have_key(:attributes)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="229">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						expect(merchant_data[:data][:attributes]).to have_key(:name)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="230">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">						expect(merchant_data[:data][:attributes][:name]).to be_a(String)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="231">
-            
-            
-
-            
-
-            <code class="ruby">					end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="232">
-            
-            
-
-            
-
-            <code class="ruby">				end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="233">
-            
-            
-
-            
-
-            <code class="ruby">			end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="234">
+          <li class="never" data-hits="" data-linenumber="164">
             
             
 
@@ -8535,7 +7798,1008 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="235">
+          <li class="never" data-hits="" data-linenumber="165">
+            
+            
+
+            
+
+            <code class="ruby">		</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="166">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">		context &quot;it can delete an item&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="167">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">			describe &quot;DESTROY /items/:id&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="168">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">				it &#39;should delete an item&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="169">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					merchant = create(:merchant)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="170">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					customer = create(:customer)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="171">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="172">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					item = create(:item, merchant_id: merchant.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="173">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					item_2 = create(:item, merchant_id: merchant.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="174">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="175">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="176">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="177">
+            
+            
+
+            
+
+            <code class="ruby">					</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="178">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="179">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="180">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="181">
+            
+            
+
+            
+
+            <code class="ruby">					</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="182">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Item.count).to eq(2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="183">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Invoice.count).to eq(2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="184">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(InvoiceItem.count).to eq(3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="185">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Merchant.count).to eq(1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="186">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="187">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					delete &quot;/api/v1/items/#{item.id}&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="188">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="189">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(response).to be_successful</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="190">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(response.status).to eq(204)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="191">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">					expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="192">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Item.count).to eq(1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="193">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Invoice.count).to eq(1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="194">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(InvoiceItem.count).to eq(1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="195">
+            
+            
+
+            
+
+            <code class="ruby">				end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="196">
+            
+            
+
+            
+
+            <code class="ruby">			end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="197">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="198">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">			context &#39;when the item does not exist&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="199">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">				it &#39;sends an error message&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="200">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					merchant = create(:merchant)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="201">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					customer = create(:customer)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="202">
+            
+            
+
+            
+
+            <code class="ruby">	</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="203">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					item = create(:item, merchant_id: merchant.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="204">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					item_2 = create(:item, merchant_id: merchant.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="205">
+            
+            
+
+            
+
+            <code class="ruby">	</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="206">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="207">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="208">
+            
+            
+
+            
+
+            <code class="ruby">					</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="209">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="210">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="211">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="212">
+            
+            
+
+            
+
+            <code class="ruby">					</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="213">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Item.count).to eq(2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="214">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Invoice.count).to eq(2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="215">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(InvoiceItem.count).to eq(3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="216">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Merchant.count).to eq(1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="217">
+            
+            
+
+            
+
+            <code class="ruby">	</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="218">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					delete &quot;/api/v1/items/#{Item.last.id+1}&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="219">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					response_body = JSON.parse(response.body, symbolize_names: true)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="220">
+            
+            
+
+            
+
+            <code class="ruby">	</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="221">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(response).to_not be_successful</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="222">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(response.status).to eq(404)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="223">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(response_body[:errors]).to eq(&quot;Unable to find item with id&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="224">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Item.count).to eq(2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="225">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Invoice.count).to eq(2)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="226">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(InvoiceItem.count).to eq(3)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="227">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					expect(Merchant.count).to eq(1)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="228">
+            
+            
+
+            
+
+            <code class="ruby">				end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="229">
+            
+            
+
+            
+
+            <code class="ruby">			end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="230">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="231">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">			context &#39;it can return merchant data&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="232">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">				describe &#39;GET /items/:id/merchant&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="233">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">					it &#39;returns merchant data&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="234">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="235">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						merchant1 = create(:merchant)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="236">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						merchant2 = create(:merchant)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="237">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						item = create(:item, merchant_id: merchant1.id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="238">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="239">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						get &quot;/api/v1/items/#{item.id}/merchant&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="240">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="241">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						merchant_data = JSON.parse(response.body, symbolize_names: true)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="242">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="243">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						expect(response).to be_successful</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="244">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						expect(merchant_data).to have_key(:data)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="245">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="246">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						expect(merchant_data[:data]).to have_key(:id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="247">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						expect(merchant_data[:data][:id]).to be_a(String)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="248">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="249">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						expect(merchant_data[:data]).to have_key(:attributes)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="250">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						expect(merchant_data[:data][:attributes]).to have_key(:name)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="251">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">						expect(merchant_data[:data][:attributes][:name]).to be_a(String)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="252">
+            
+            
+
+            
+
+            <code class="ruby">					end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="253">
+            
+            
+
+            
+
+            <code class="ruby">				end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="254">
+            
+            
+
+            
+
+            <code class="ruby">			end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="255">
+            
+            
+
+            
+
+            <code class="ruby">		end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="256">
             
             
 
@@ -8546,7 +8810,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="236">
+          <li class="never" data-hits="" data-linenumber="257">
             
             
 

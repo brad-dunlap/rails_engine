@@ -103,6 +103,27 @@ describe 'Items API' do
 		end
 	end
 
+	context "it cannot create a new item" do
+		describe 'POST /item/' do
+			it 'returns error if uable to create' do
+				merchant = Merchant.create(:name => 'Bob', :id => 1)
+
+				item_params = ({
+					name: 'chair',
+					description: 'it is just a chair',
+					merchant_id: merchant.id
+				})
+				headers = {"CONTENT_TYPE" => "application/json"}
+
+				post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+
+				expect(response).to_not be_successful
+				expect(response.status).to eq(422)
+				expect(response.body).to include("Unable to create item - missing required parameters")
+			end
+		end
+	end
+
 	context 'it can update existing items' do
 		describe 'PATCH /item/' do
 			context 'it can successfully update existing items' do

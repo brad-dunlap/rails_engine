@@ -18,11 +18,14 @@ class Api::V1::ItemsController < ApplicationController
 	end
 
 	def create
-		item = Item.create!(item_params)
-		render json: ItemSerializer.new(item), status: :created
-	rescue ActiveRecord::RecordInvalid
-		render json: { errors: "Unable to Create Item" }, status: :unprocessable_entity
+		if item_params[:name].blank? || item_params[:description].blank? || item_params[:unit_price].blank?
+			render json: { errors: "Unable to create item - missing required parameters" }, status: :unprocessable_entity
+		else
+			item = Item.create!(item_params)
+			render json: ItemSerializer.new(item), status: :created
+		end
 	end
+	
 
 	def update
 		item = Item.find(params[:id])
