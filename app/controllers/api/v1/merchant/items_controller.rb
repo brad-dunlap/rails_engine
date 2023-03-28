@@ -1,6 +1,6 @@
 class Api::V1::Merchant::ItemsController < ApplicationController
   def index
-		merchant_id = params[:merchant_id].to_i
+		merchant_id = params[:merchant_id]
 	
 		if merchant_id == 0
 			render json: { errors: "Invalid merchant ID" }, status: 404
@@ -15,5 +15,4 @@ class Api::V1::Merchant::ItemsController < ApplicationController
 			render json: { errors: "Merchant item not found" }, status: 404
 		end
 	end
-	
 end

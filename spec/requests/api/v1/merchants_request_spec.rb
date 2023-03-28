@@ -125,4 +125,29 @@ describe 'Merchants API' do
 			end
 		end
 	end
+
+	describe 'find all merchants by name' do
+		context 'if merchant is found' do
+			it 'returns merchants by name in case-insensitive alphabetical order' do
+				@merchant1 = create(:merchant, name: "Bradley")
+				@merchant2 = create(:merchant, name: "Alexander")
+				@merchant3 = create(:merchant, name: "Ashley")
+				@merchant4 = create(:merchant, name: "Chris")
+
+				get '/api/v1/merchants/find_all?name=lEy'
+
+				data = JSON.parse(response.body, symbolize_names: true)
+
+				expect(response).to be_successful
+				expect(data).to have_key(:data)
+				expect(data[:data].count).to eq(2)
+
+				data[:data].each do |data|
+					expect(data).to have_key(:attributes)
+					expect(data[:attributes]).to have_key(:name)
+					expect(data[:attributes][:name]).to be_a String
+				end
+			end
+		end
+	end
 end
