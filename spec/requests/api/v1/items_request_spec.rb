@@ -122,7 +122,7 @@ describe 'Items API' do
 				end
 			end
 
-			context "it cannot successfully update an existing item" do
+			context "it cannot update an existing item" do
 				it 'returns an error' do
 					item = create(:item)
 					previous_item_name = Item.last.name
@@ -138,6 +138,72 @@ describe 'Items API' do
 					expect(item.name).to eq(previous_item_name)
 					expect(item.name).to_not eq("New Item")
 					expect(response_body[:errors]).to eq("Unable to update item")
+				end
+			end
+		end
+		
+		context "it can delete an item" do
+			describe "DESTROY /items/:id" do
+				it 'should delete an item' do
+					merchant = create(:merchant)
+					customer = create(:customer)
+
+					item = create(:item, merchant_id: merchant.id)
+					item_2 = create(:item, merchant_id: merchant.id)
+
+					invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+					invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+					
+					invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)
+					invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)
+					invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)
+					
+					expect(Item.count).to eq(2)
+					expect(Invoice.count).to eq(2)
+					expect(InvoiceItem.count).to eq(3)
+					expect(Merchant.count).to eq(1)
+
+					delete "/api/v1/items/#{item.id}"
+
+					expect(response).to be_successful
+					expect(response.status).to eq(204)
+					expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
+					expect(Item.count).to eq(1)
+					expect(Invoice.count).to eq(1)
+					expect(InvoiceItem.count).to eq(1)
+				end
+			end
+
+			context 'when the item does not exist' do
+				it 'sends an error message' do
+					merchant = create(:merchant)
+					customer = create(:customer)
+	
+					item = create(:item, merchant_id: merchant.id)
+					item_2 = create(:item, merchant_id: merchant.id)
+	
+					invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+					invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+					
+					invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)
+					invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)
+					invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)
+					
+					expect(Item.count).to eq(2)
+					expect(Invoice.count).to eq(2)
+					expect(InvoiceItem.count).to eq(3)
+					expect(Merchant.count).to eq(1)
+	
+					delete "/api/v1/items/#{Item.last.id+1}"
+					response_body = JSON.parse(response.body, symbolize_names: true)
+	
+					expect(response).to_not be_successful
+					expect(response.status).to eq(404)
+					expect(response_body[:errors]).to eq("Unable to find item with id")
+					expect(Item.count).to eq(2)
+					expect(Invoice.count).to eq(2)
+					expect(InvoiceItem.count).to eq(3)
+					expect(Merchant.count).to eq(1)
 				end
 			end
 		end

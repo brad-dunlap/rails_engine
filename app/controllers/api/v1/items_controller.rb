@@ -81,6 +81,22 @@ class Api::V1::ItemsController < ApplicationController
 			render json: { errors: "Unable to update item" }, status: 404
 		end
 	end
+
+	def destroy
+		if Item.exists?(params[:id])
+			item = Item.find(params[:id])
+		
+			item.invoices.each do |invoice|
+				if invoice.has_items?
+				invoice.destroy
+				end
+			end
+			item.destroy
+		else
+			render json: { errors: "Unable to find item with id" }, status: 404
+		end
+	end
+
 	private
 
 	def item_params
