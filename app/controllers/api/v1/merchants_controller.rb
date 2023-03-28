@@ -4,33 +4,14 @@ class Api::V1::MerchantsController < ApplicationController
 		if @merchants.empty?
 			render json: { errors: "No Merchants Found" }, status: 404
 		else
-
-			render json: {
-				data: @merchants.map do |merchant|
-					{
-						id: merchant.id,
-						type: 'merchant',
-						attributes: {
-							name: merchant.name
-						}
-					}
-				end
-			}
+			render json: MerchantSerializer.new(@merchants)
 		end
 	end
 
 	def show
 		if Merchant.exists?(params[:id])
 			@merchant = Merchant.find(params[:id])
-				render json: {
-					data: {
-						id: @merchant.id,
-						type: 'merchant',
-						attributes: {
-							name: @merchant.name
-						}
-					}
-				}
+			render json: MerchantSerializer.new(@merchant)
 		else
 			render json: { errors: "Merchant not found" }, status: 404
 		end				

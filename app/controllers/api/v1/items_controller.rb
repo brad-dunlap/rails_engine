@@ -4,38 +4,14 @@ class Api::V1::ItemsController < ApplicationController
 		if @items.empty?
 			render json: { errors: "No Items Found" }, status: 404
 		else
-			render json: {
-				data: @items.map do |item|
-					{
-						id: item.id,
-						type: 'item',
-						attributes: {
-							name: item.name,
-							description: item.description,
-							unit_price: item.unit_price,
-							merchant_id: item.merchant_id
-						}
-					}
-				end
-			}
+			render json: ItemSerializer.new(@items)
 		end
 	end
 
 	def show
 		if Item.exists?(params[:id])
 			@item = Item.find(params[:id])
-			render json: {
-				data: {
-					id: @item.id,
-					type: 'item',
-					attributes: {
-						name: @item.name,
-						description: @item.description,
-						unit_price: @item.unit_price,
-						merchant_id: @item.merchant_id
-					}
-				}
-			}
+			render json: ItemSerializer.new(@item)
 		else 
 			render json: { errors: "Item Not Found" }, status: 404
 		end		
@@ -44,20 +20,9 @@ class Api::V1::ItemsController < ApplicationController
 	def create
 		item = Item.create(item_params)
 		if item.save
-			render json: {
-				data: {
-					id: item.id,
-					type: 'item',
-					attributes: {
-						name: item.name,
-						description: item.description,
-						unit_price: item.unit_price,
-						merchant_id: item.merchant_id
-					}
-				}
-			}
+			render json: ItemSerializer.new(Item.create(item_params)), status: :created
 		else 
-			render json: { errors: "Unable to Create Item" }, status: 404
+			render json: { errors: "Unable to Create Item" }, status: 400
 		end		
 	end
 
@@ -65,18 +30,7 @@ class Api::V1::ItemsController < ApplicationController
 		item = Item.find(params[:id])
 		item.update(item_params)
 		if item.save
-			render json: {
-				data: {
-					id: item.id,
-					type: 'item',
-					attributes: {
-						name: item.name,
-						description: item.description,
-						unit_price: item.unit_price,
-						merchant_id: item.merchant_id
-					}
-				}
-			}
+			render json: ItemSerializer.new(item)
 		else 
 			render json: { errors: "Unable to update item" }, status: 404
 		end
@@ -84,8 +38,7 @@ class Api::V1::ItemsController < ApplicationController
 
 	def destroy
 		if Item.exists?(params[:id])
-			item = Item.find(params[:id])
-		
+			item = Item.find(params[:id])		
 			item.invoices.each do |invoice|
 				if invoice.has_items?
 				invoice.destroy
