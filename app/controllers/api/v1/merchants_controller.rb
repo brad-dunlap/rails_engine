@@ -1,10 +1,10 @@
 class Api::V1::MerchantsController < ApplicationController
 	def index
-		merchants = Merchant.all
+		@merchants = Merchant.all
 		if @merchants.empty?
 			render json: { errors: "No Merchants Found" }, status: 404
 		else
-			render json: MerchantSerializer.new(merchants)
+			render json: MerchantSerializer.new(@merchants)
 		end
 	end
 

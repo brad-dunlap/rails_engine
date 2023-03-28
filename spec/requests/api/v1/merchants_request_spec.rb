@@ -149,5 +149,19 @@ describe 'Merchants API' do
 				end
 			end
 		end
+
+		context 'if merchant is not found' do
+			it 'returns an error message' do
+				@merchant1 = create(:merchant, name: "Tim")
+				@merchant2 = create(:merchant, name: "John")
+
+				get '/api/v1/merchants/find_all?name=Bob'
+
+				data = JSON.parse(response.body, symbolize_names: true)
+				expect(response).to be_successful
+				expect(data[:data]).to eq([])
+
+			end
+		end
 	end
 end
