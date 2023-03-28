@@ -162,95 +162,167 @@ describe 'Items API' do
 				end
 			end
 		end
+	end
 		
-		context "it can delete an item" do
-			describe "DESTROY /items/:id" do
-				it 'should delete an item' do
-					merchant = create(:merchant)
-					customer = create(:customer)
+	context "it can delete an item" do
+		describe "DESTROY /items/:id" do
+			it 'should delete an item' do
+				merchant = create(:merchant)
+				customer = create(:customer)
 
-					item = create(:item, merchant_id: merchant.id)
-					item_2 = create(:item, merchant_id: merchant.id)
+				item = create(:item, merchant_id: merchant.id)
+				item_2 = create(:item, merchant_id: merchant.id)
 
-					invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
-					invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
-					
-					invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)
-					invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)
-					invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)
-					
-					expect(Item.count).to eq(2)
-					expect(Invoice.count).to eq(2)
-					expect(InvoiceItem.count).to eq(3)
-					expect(Merchant.count).to eq(1)
+				invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+				invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+				
+				invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)
+				invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)
+				invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)
+				
+				expect(Item.count).to eq(2)
+				expect(Invoice.count).to eq(2)
+				expect(InvoiceItem.count).to eq(3)
+				expect(Merchant.count).to eq(1)
 
-					delete "/api/v1/items/#{item.id}"
+				delete "/api/v1/items/#{item.id}"
 
-					expect(response).to be_successful
-					expect(response.status).to eq(204)
-					expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
-					expect(Item.count).to eq(1)
-					expect(Invoice.count).to eq(1)
-					expect(InvoiceItem.count).to eq(1)
-				end
+				expect(response).to be_successful
+				expect(response.status).to eq(204)
+				expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
+				expect(Item.count).to eq(1)
+				expect(Invoice.count).to eq(1)
+				expect(InvoiceItem.count).to eq(1)
 			end
+		end
 
-			context 'when the item does not exist' do
-				it 'sends an error message' do
-					merchant = create(:merchant)
-					customer = create(:customer)
-	
-					item = create(:item, merchant_id: merchant.id)
-					item_2 = create(:item, merchant_id: merchant.id)
-	
-					invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
-					invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
-					
-					invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)
-					invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)
-					invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)
-					
-					expect(Item.count).to eq(2)
-					expect(Invoice.count).to eq(2)
-					expect(InvoiceItem.count).to eq(3)
-					expect(Merchant.count).to eq(1)
-	
-					delete "/api/v1/items/#{Item.last.id+1}"
-					response_body = JSON.parse(response.body, symbolize_names: true)
-	
-					expect(response).to_not be_successful
-					expect(response.status).to eq(404)
-					expect(response_body[:errors]).to eq("Unable to find item with id")
-					expect(Item.count).to eq(2)
-					expect(Invoice.count).to eq(2)
-					expect(InvoiceItem.count).to eq(3)
-					expect(Merchant.count).to eq(1)
-				end
+		context 'when the item does not exist' do
+			it 'sends an error message' do
+				merchant = create(:merchant)
+				customer = create(:customer)
+
+				item = create(:item, merchant_id: merchant.id)
+				item_2 = create(:item, merchant_id: merchant.id)
+
+				invoice_1 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+				invoice_2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+				
+				invoice_item_1 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item.id, quantity: 2)
+				invoice_item_2 = create(:invoice_item, invoice_id: invoice_2.id, item_id: item.id, quantity: 4)
+				invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)
+				
+				expect(Item.count).to eq(2)
+				expect(Invoice.count).to eq(2)
+				expect(InvoiceItem.count).to eq(3)
+				expect(Merchant.count).to eq(1)
+
+				delete "/api/v1/items/#{Item.last.id+1}"
+				response_body = JSON.parse(response.body, symbolize_names: true)
+
+				expect(response).to_not be_successful
+				expect(response.status).to eq(404)
+				expect(response_body[:errors]).to eq("Unable to find item with id")
+				expect(Item.count).to eq(2)
+				expect(Invoice.count).to eq(2)
+				expect(InvoiceItem.count).to eq(3)
+				expect(Merchant.count).to eq(1)
 			end
+		end
+	end
+	
 
-			context 'it can return merchant data' do
-				describe 'GET /items/:id/merchant' do
-					it 'returns merchant data' do
+	context 'it can return merchant data' do
+		describe 'GET /items/:id/merchant' do
+			it 'returns merchant data' do
 
-						merchant1 = create(:merchant)
-						merchant2 = create(:merchant)
-						item = create(:item, merchant_id: merchant1.id)
+				merchant1 = create(:merchant)
+				merchant2 = create(:merchant)
+				item = create(:item, merchant_id: merchant1.id)
 
-						get "/api/v1/items/#{item.id}/merchant"
+				get "/api/v1/items/#{item.id}/merchant"
 
-						merchant_data = JSON.parse(response.body, symbolize_names: true)
+				merchant_data = JSON.parse(response.body, symbolize_names: true)
 
-						expect(response).to be_successful
-						expect(merchant_data).to have_key(:data)
+				expect(response).to be_successful
+				expect(merchant_data).to have_key(:data)
 
-						expect(merchant_data[:data]).to have_key(:id)
-						expect(merchant_data[:data][:id]).to be_a(String)
+				expect(merchant_data[:data]).to have_key(:id)
+				expect(merchant_data[:data][:id]).to be_a(String)
 
-						expect(merchant_data[:data]).to have_key(:attributes)
-						expect(merchant_data[:data][:attributes]).to have_key(:name)
-						expect(merchant_data[:data][:attributes][:name]).to be_a(String)
-					end
-				end
+				expect(merchant_data[:data]).to have_key(:attributes)
+				expect(merchant_data[:data][:attributes]).to have_key(:name)
+				expect(merchant_data[:data][:attributes][:name]).to be_a(String)
+			end
+		end
+	end
+
+	describe 'find one item by name' do
+		context 'if item is found' do
+			it 'returns the first object in an array that is in alphabetical order' do
+				merchant = create(:merchant)
+				item_1 = create(:item, name: "stuffed dog", description: "its a doggy", merchant_id: merchant.id)
+				item_2 = create(:item, name: "cat litter", description: "cover the smell", merchant_id: merchant.id)
+				item_3 = create(:item, name: "dog bowl", description: "cute dog bowl", merchant_id: merchant.id)
+
+				get "/api/v1/items/find?name=dog"
+
+				data = JSON.parse(response.body, symbolize_names: true)
+
+				expect(response).to be_successful
+				expect(data).to have_key(:data)
+				expect(data[:data]).to have_key(:id)
+			end
+		end
+
+		context 'if item not is found' do
+			it 'returns an error message' do
+				merchant = create(:merchant)
+				item_1 = create(:item, name: "stuffed dog", description: "its a doggy", merchant_id: merchant.id)
+				
+
+				get "/api/v1/items/find?name=fish"
+
+				data = JSON.parse(response.body, symbolize_names: true)
+
+				expect(response).to be_successful
+				expect(data).to have_key(:data)
+				expect(data[:data]).to_not have_key(:id)
+				expect(data[:data][:errors]).to include("no results found")
+			end
+		end
+	end
+
+	describe 'find one object by min or max price' do
+		context 'if item is found' do
+			it 'returns the first item that is greater than or equal to the minimum price' do
+				merchant = create(:merchant)
+				item1 = create(:item, name: "Batman", unit_price: 100, merchant_id: merchant.id)
+				item2 = create(:item, name: "Joker", unit_price: 200, merchant_id: merchant.id)
+				item3 = create(:item, name: "Catwoman", unit_price: 300, merchant_id: merchant.id)
+
+				get "/api/v1/items/find?min_price=150"
+
+				data = JSON.parse(response.body, symbolize_names: true)
+
+				expect(response).to be_successful
+
+				expect(data).to have_key(:data)
+				expect(data[:data]).to have_key(:id)
+
+				item = data[:data]
+
+				expect(item).to have_key(:attributes)
+				expect(item[:attributes]).to have_key(:name)
+				expect(item[:attributes][:name]).to eq(item3.name)
+
+				expect(item[:attributes]).to have_key(:description)
+				expect(item[:attributes][:description]).to eq(item3.description)
+
+				expect(item[:attributes]).to have_key(:unit_price)
+				expect(item[:attributes][:unit_price]).to eq(item3.unit_price)
+
+				expect(item[:attributes]).to have_key(:merchant_id)
+				expect(item[:attributes][:merchant_id]).to eq(item3.merchant_id)
 			end
 		end
 	end
