@@ -1,12 +1,6 @@
 class Api::V1::Merchant::ItemsController < ApplicationController
   def index
 		merchant_id = params[:merchant_id]
-	
-		if merchant_id == 0
-			render json: { errors: "Invalid merchant ID" }, status: 404
-			return
-		end
-	
 		merchant = Merchant.find_by(id: merchant_id)
 	
 		if merchant && merchant.items.exists?
