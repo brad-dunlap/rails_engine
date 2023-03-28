@@ -396,7 +396,9 @@ describe 'Items API' do
 					get "/api/v1/items/find?name=dog&min_price=100"
 
 					expect(response).to_not be_successful
+					expect(response.status).to eq(400)
 					expect(response.body).to include("cannot send name with price")
+
 				end
 			end
 		end
