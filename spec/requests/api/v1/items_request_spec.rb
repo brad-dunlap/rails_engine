@@ -324,6 +324,67 @@ describe 'Items API' do
 				expect(item[:attributes]).to have_key(:merchant_id)
 				expect(item[:attributes][:merchant_id]).to eq(item3.merchant_id)
 			end
+
+			it 'returns the first item that is less than or equal to the maximum price' do
+				merchant = create(:merchant)
+				item1 = create(:item, name: "Batman", unit_price: 100, merchant_id: merchant.id)
+				item2 = create(:item, name: "Joker", unit_price: 200, merchant_id: merchant.id)
+				item3 = create(:item, name: "Catwoman", unit_price: 300, merchant_id: merchant.id)
+
+				get "/api/v1/items/find?max_price=250"
+
+				data = JSON.parse(response.body, symbolize_names: true)
+
+				expect(response).to be_successful
+
+				expect(data).to have_key(:data)
+				expect(data[:data]).to have_key(:id)
+
+				item = data[:data]
+
+				expect(item).to have_key(:attributes)
+				expect(item[:attributes]).to have_key(:name)
+				expect(item[:attributes][:name]).to eq(item1.name)
+
+				expect(item[:attributes]).to have_key(:description)
+				expect(item[:attributes][:description]).to eq(item1.description)
+
+				expect(item[:attributes]).to have_key(:unit_price)
+				expect(item[:attributes][:unit_price]).to eq(item1.unit_price)
+
+				expect(item[:attributes]).to have_key(:merchant_id)
+				expect(item[:attributes][:merchant_id]).to eq(item1.merchant_id)
+			end
+		end
+
+		context 'if object is not found' do
+			describe 'search is less than 0' do
+				it 'returns an error message' do
+					merchant = create(:merchant)
+					item1 = create(:item, name: "Batman", unit_price: 100, merchant_id: merchant.id)
+					item2 = create(:item, name: "Joker", unit_price: 200, merchant_id: merchant.id)
+					item3 = create(:item, name: "Catwoman", unit_price: 300, merchant_id: merchant.id)
+
+					get "/api/v1/items/find?min_price=-1"
+
+					expect(response).to_not be_successful
+					expect(response.body).to include("price cannot be negative")
+				end
+			end
+
+			describe 'no matches found' do
+				it 'returns an error message' do
+					merchant = create(:merchant)
+					item1 = create(:item, name: "Batman", unit_price: 100, merchant_id: merchant.id)
+					item2 = create(:item, name: "Joker", unit_price: 200, merchant_id: merchant.id)
+					item3 = create(:item, name: "Catwoman", unit_price: 300, merchant_id: merchant.id)
+
+					get "/api/v1/items/find?min_price=101&max_price=199"
+
+					expect(response).to be_successful
+					expect(response.body).to include("no matches found")
+				end
+			end
 		end
 	end
 end

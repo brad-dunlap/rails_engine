@@ -27,7 +27,7 @@ class Api::V1::Item::SearchController < ApplicationController
 			items = Item.search_by_price(params[:min_price], params[:max_price])
 			result = ItemSerializer.new(items)
 			if items.nil?
-				result = ErrorSerializer.no_matches_found
+				result = ErrorSerializer.no_matches_found("no matches found")
 			end
 		end
 		render json: result, status: status
