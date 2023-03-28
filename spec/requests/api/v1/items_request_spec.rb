@@ -385,6 +385,20 @@ describe 'Items API' do
 					expect(response.body).to include("no matches found")
 				end
 			end
+
+			describe 'cannot send name with price' do
+				it 'returns an error message if a user searches for both name and price' do
+					merchant = create(:merchant)
+					item1 = create(:item, name: "Batman", unit_price: 100, merchant_id: merchant.id)
+					item2 = create(:item, name: "Joker", unit_price: 200, merchant_id: merchant.id)
+					item3 = create(:item, name: "Catwoman", unit_price: 300, merchant_id: merchant.id)
+
+					get "/api/v1/items/find?name=dog&min_price=100"
+
+					expect(response).to_not be_successful
+					expect(response.body).to include("cannot send name with price")
+				end
+			end
 		end
 	end
 end
