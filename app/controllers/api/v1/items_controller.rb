@@ -33,7 +33,7 @@ class Api::V1::ItemsController < ApplicationController
 		if item.save
 			render json: ItemSerializer.new(item)
 		else 
-			render json: { errors: "Unable to update item" }, status: 422
+			render json: { errors: "Unable to update item" }, status: 404
 		end
 	end
 
