@@ -18,12 +18,10 @@ class Api::V1::ItemsController < ApplicationController
 	end
 
 	def create
-		item = Item.create(item_params)
-		if item.save
-			render json: ItemSerializer.new(Item.create(item_params)), status: :created
-		else 
-			render json: { errors: "Unable to Create Item" }, status: 400
-		end		
+		item = Item.create!(item_params)
+		render json: ItemSerializer.new(item), status: :created
+	rescue ActiveRecord::RecordInvalid
+		render json: { errors: "Unable to Create Item" }, status: :unprocessable_entity
 	end
 
 	def update
@@ -32,7 +30,7 @@ class Api::V1::ItemsController < ApplicationController
 		if item.save
 			render json: ItemSerializer.new(item)
 		else 
-			render json: { errors: "Unable to update item" }, status: 404
+			render json: { errors: "Unable to update item" }, status: 422
 		end
 	end
 

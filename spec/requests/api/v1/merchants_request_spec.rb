@@ -94,7 +94,19 @@ describe 'Merchants API' do
 				merchant = JSON.parse(response.body, symbolize_names: true )
 
 				expect(response.status).to eq(404)
-				expect(response.body).to include("Merchant not found")
+				expect(response.body).to include("No merchant found")
+			end
+		end
+
+		describe 'GET /merchants/0' do
+			it 'returns a 404 error' do
+
+				get '/api/v1/merchants/0'
+
+				merchant = JSON.parse(response.body, symbolize_names: true )
+
+				expect(response.status).to eq(404)
+				expect(merchant[:errors]).to eq("No merchant found")
 			end
 		end
 	end
