@@ -381,7 +381,7 @@ describe 'Items API' do
 
 					get "/api/v1/items/find?min_price=101&max_price=199"
 
-					expect(response).to be_successful
+					expect(response).to_not be_successful
 					expect(response.body).to include("no matches found")
 				end
 			end
