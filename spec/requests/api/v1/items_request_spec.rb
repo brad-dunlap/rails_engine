@@ -267,10 +267,10 @@ describe 'Items API' do
 				get "/api/v1/items/find?name=dog"
 
 				data = JSON.parse(response.body, symbolize_names: true)
-
 				expect(response).to be_successful
 				expect(data).to have_key(:data)
 				expect(data[:data]).to have_key(:id)
+				expect(data.size).to eq(1)
 			end
 		end
 

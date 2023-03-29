@@ -15,16 +15,14 @@ class Item < ApplicationRecord
 	def self.search_by_price(min, max)
 		if min != nil && max != nil
 			where("unit_price >= ? AND unit_price <= ?", min, max)
-			.order(:name)
-			.first
+			
 		elsif max == nil
-			where("unit_price >= ?", "#{min}")
-			.order(:name)
-			.first
+			where("unit_price >= ?", min)
+			
 		else min == nil
-			where("unit_price <= ?", "#{max}")
-			.order(:name)
-			.first
+			where("unit_price <= ?", max)
 		end
+		.order(:name)
+		.first
 	end
 end

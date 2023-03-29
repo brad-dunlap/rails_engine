@@ -23,7 +23,7 @@ RSpec.describe Item, type: :model do
 				item_2 = create(:item, name: "cat litter", description: "cover the smell", merchant_id: merchant.id)
 				item_3 = create(:item, name: "dog bowl", description: "cute dog bowl", merchant_id: merchant.id)
 
-				expect(Item.search_by_name("dog")).to eq(item_3)
+				expect(Item.search_by_name("dOg")).to eq(item_3)
       end
 		end
 
