@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-03-29T12:24:57-06:00">2023-03-29T12:24:57-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-03-30T11:22:10-06:00">2023-03-30T11:22:10-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -1394,7 +1394,7 @@
 
             
 
-            <code class="ruby">				if invoice.has_items?</code>
+            <code class="ruby">				if invoice.one_item?</code>
           </li>
         </div>
       
@@ -2469,7 +2469,7 @@
 
             
 
-            <code class="ruby">	def has_items?</code>
+            <code class="ruby">	def one_item?</code>
           </li>
         </div>
       
@@ -6704,7 +6704,7 @@
 
             
 
-            <code class="ruby">				expect(invoice_1.has_items?).to eq(false)</code>
+            <code class="ruby">				expect(invoice_1.one_item?).to eq(false)</code>
           </li>
         </div>
       
@@ -6726,7 +6726,7 @@
 
             
 
-            <code class="ruby">				expect(invoice_2.has_items?).to eq(true)</code>
+            <code class="ruby">				expect(invoice_2.one_item?).to eq(true)</code>
           </li>
         </div>
       

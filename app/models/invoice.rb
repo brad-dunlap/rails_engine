@@ -4,7 +4,7 @@ class Invoice < ApplicationRecord
   has_many :transactions, dependent: :destroy
   belongs_to :merchant
 
-	def has_items?
+	def one_item?
 		self.items.size <= 1
 	end
 end

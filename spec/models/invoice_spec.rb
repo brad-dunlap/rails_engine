@@ -9,7 +9,7 @@ RSpec.describe Invoice, type: :model do
   end
 
 	describe 'instance methods' do
-		describe '#has_items?' do
+		describe '#one_item?' do
 			it 'returns false if there are one or less items' do	
 				merchant = create(:merchant)
 				customer = create(:customer)
@@ -25,9 +25,9 @@ RSpec.describe Invoice, type: :model do
 				invoice_item_3 = create(:invoice_item, invoice_id: invoice_1.id, item_id: item_2.id, quantity: 3)
 
 				expect(invoice_1.items.size).to eq(2)
-				expect(invoice_1.has_items?).to eq(false)
+				expect(invoice_1.one_item?).to eq(false)
 				expect(invoice_2.items.size).to eq(1)
-				expect(invoice_2.has_items?).to eq(true)
+				expect(invoice_2.one_item?).to eq(true)
 			
 			end
 		end

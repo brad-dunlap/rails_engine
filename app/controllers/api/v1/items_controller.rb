@@ -41,7 +41,7 @@ class Api::V1::ItemsController < ApplicationController
 		if Item.exists?(params[:id])
 			item = Item.find(params[:id])		
 			item.invoices.each do |invoice|
-				if invoice.has_items?
+				if invoice.one_item?
 				invoice.destroy
 				end
 			end
