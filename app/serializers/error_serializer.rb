@@ -14,12 +14,4 @@ class ErrorSerializer
 			}
     }
   end
-
-  def self.bad_request(error)
-    {
-			"data": {
-      "errors": error
-   	 	}
-		}
-  end
 end

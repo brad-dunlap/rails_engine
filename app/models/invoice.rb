@@ -5,6 +5,6 @@ class Invoice < ApplicationRecord
   belongs_to :merchant
 
 	def one_item?
-		self.items.size <= 1
+		self.items.count <= 1
 	end
 end
