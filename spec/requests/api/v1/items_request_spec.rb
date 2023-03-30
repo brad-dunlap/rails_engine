@@ -284,10 +284,8 @@ describe 'Items API' do
 
 				data = JSON.parse(response.body, symbolize_names: true)
 
-				expect(response).to be_successful
-				expect(data).to have_key(:data)
-				expect(data[:data]).to_not have_key(:id)
-				expect(data[:data][:errors]).to include("no results found")
+				expect(response).to_not be_successful
+				expect(data[:errors]).to include("no results found")
 			end
 		end
 	end

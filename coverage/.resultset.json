@@ -792,8 +792,6 @@
           null,
           1,
           1,
-          1,
-          1,
           null,
           null,
           null,
@@ -1239,29 +1237,6 @@
           null
         ]
       },
-      "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/app/serializers/error_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          2,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
       "/Users/braddunlap/Desktop/turing_work/3mod/projects/rails_engine/app/controllers/api/v1/merchant/items_controller.rb": {
         "lines": [
           1,
@@ -1289,6 +1264,6 @@
         ]
       }
     },
-    "timestamp": 1680197413
+    "timestamp": 1680197792
   }
 }
