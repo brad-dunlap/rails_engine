@@ -285,7 +285,7 @@ describe 'Items API' do
 				data = JSON.parse(response.body, symbolize_names: true)
 
 				expect(response).to_not be_successful
-				expect(data[:errors]).to include("no results found")
+				expect(data[:data][:errors]).to include("no results found")
 			end
 		end
 	end

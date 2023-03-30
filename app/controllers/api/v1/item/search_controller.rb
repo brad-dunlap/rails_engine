@@ -15,7 +15,7 @@ class Api::V1::Item::SearchController < ApplicationController
 
 	def by_name
 		if Item.search_by_name(params[:name]).nil?
-			render json: ErrorSerializer.invalid_parameters("no results found")
+			render json: ErrorSerializer.invalid_parameters("no results found"), status: :not_found
 		else
 			render json: ItemSerializer.new(Item.search_by_name(params[:name]))
 		end
