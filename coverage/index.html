@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-03-30T11:47:46-06:00">2023-03-30T11:47:46-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-03-30T11:49:46-06:00">2023-03-30T11:49:46-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -965,7 +965,7 @@
 
             
 
-            <code class="ruby">		@items = Item.all</code>
+            <code class="ruby">		items = Item.all</code>
           </li>
         </div>
       
@@ -976,7 +976,7 @@
 
             
 
-            <code class="ruby">		if @items.empty?</code>
+            <code class="ruby">		if items.empty?</code>
           </li>
         </div>
       
@@ -1009,7 +1009,7 @@
 
             
 
-            <code class="ruby">			render json: ItemSerializer.new(@items)</code>
+            <code class="ruby">			render json: ItemSerializer.new(items)</code>
           </li>
         </div>
       
@@ -1075,7 +1075,7 @@
 
             
 
-            <code class="ruby">			@item = Item.find(params[:id])</code>
+            <code class="ruby">			item = Item.find(params[:id])</code>
           </li>
         </div>
       
@@ -1086,7 +1086,7 @@
 
             
 
-            <code class="ruby">			render json: ItemSerializer.new(@item)</code>
+            <code class="ruby">			render json: ItemSerializer.new(item)</code>
           </li>
         </div>
       
@@ -1905,7 +1905,7 @@
 
             
 
-            <code class="ruby">		@merchants = Merchant.all</code>
+            <code class="ruby">		merchants = Merchant.all</code>
           </li>
         </div>
       
@@ -1916,7 +1916,7 @@
 
             
 
-            <code class="ruby">		if @merchants.empty?</code>
+            <code class="ruby">		if merchants.empty?</code>
           </li>
         </div>
       
@@ -1949,7 +1949,7 @@
 
             
 
-            <code class="ruby">			render json: MerchantSerializer.new(@merchants)</code>
+            <code class="ruby">			render json: MerchantSerializer.new(merchants)</code>
           </li>
         </div>
       

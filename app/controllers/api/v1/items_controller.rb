@@ -1,17 +1,17 @@
 class Api::V1::ItemsController < ApplicationController
 	def index
-		@items = Item.all
-		if @items.empty?
+		items = Item.all
+		if items.empty?
 			render json: { errors: "No Items Found" }, status: 404
 		else
-			render json: ItemSerializer.new(@items)
+			render json: ItemSerializer.new(items)
 		end
 	end
 
 	def show
 		if Item.exists?(params[:id])
-			@item = Item.find(params[:id])
-			render json: ItemSerializer.new(@item)
+			item = Item.find(params[:id])
+			render json: ItemSerializer.new(item)
 		else 
 			render json: { errors: "Item Not Found" }, status: 404
 		end		
